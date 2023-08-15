@@ -1,4 +1,5 @@
-
+use biblioteca
+go
 -----Procesos almacenados------
 create procedure Sp_Modificar_Prestamos
 (	
@@ -85,6 +86,69 @@ create procedure Sp_Prestamo
  
  exec Sp_Prestamo
 --###########################################################################################--
+--###########################################################################################--
+create trigger TR_CambiarAEstadoOcupado
+on Prestamo
+for INSERT
+as begin
+Declare @No_Adquisicion int
+select @No_Adquisicion =No_Adquisicion from inserted 
+ update dbo.Libro
+    SET Estatus = 'Ocupado'
+    WHERE No_Adquisicion=@No_Adquisicion
 
+end
+go
+
+
+create trigger TR_CambiarAEstadoDisponible
+on Prestamo
+for Delete
+as begin
+Declare @No_Adquisicion int
+select @No_Adquisicion =No_Adquisicion from deleted
+ update dbo.Libro
+    SET Estatus = 'Disponible'
+    WHERE No_Adquisicion=@No_Adquisicion
+
+end
+go
+
+--######################Cantidad de libros########-----
+create trigger TR_CantidaLibros
+on Libro
+for INSERT
+as begin
+Declare @Cantidad int,@ibsen varchar(18)
+
+select @ibsen=IBSN from  inserted
+
+select @Cantidad=COUNT(*) from  Libro
+where IBSN = @ibsen
+
+ update Libro
+    SET Cantidad = @Cantidad
+   where IBSN = @ibsen
+
+end
+go
+--###############################################################--
+create trigger TR_CantidaLibros_elimnados
+on Libro
+for Delete
+as begin
+Declare @Cantidad int,@ibsen varchar(18)
+
+select @ibsen=IBSN from  deleted
+
+select @Cantidad=COUNT(*) from  Libro
+where IBSN = @ibsen
+
+ update Libro
+    SET Cantidad = @Cantidad
+   where IBSN = @ibsen
+
+end
+go
 
 

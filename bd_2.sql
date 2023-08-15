@@ -58,15 +58,15 @@ create procedure Sp_Modificar_Usuario
 	)
 	as BEGIN
 	 update dbo.Usuario set 
-	@Nombres=@Nombres,
-	@ApePa= @ApePa,
-	@ApeMa=@ApeMa,
-	@Calle=@Calle,
-	@Colonia=@Colonia,
-	@NroCasa=@NroCasa,
-	@tipo=@tipo,
-	@Contraseña=@Contraseña,
-	@Id_Lector=@Id_Lector
+	Nombres=@Nombres,
+	ApePa= @ApePa,
+	ApeMa=@ApeMa,
+	Calle=@Calle,
+	Colonia=@Colonia,
+	NroCasa=@NroCasa,
+	tipo=@tipo,
+	Contraseña=@Contraseña,
+	Id_Lector=@Id_Lector
 	where Identificador = @Identificador
 	end
 	go
