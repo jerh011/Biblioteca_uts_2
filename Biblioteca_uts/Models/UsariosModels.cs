@@ -4,6 +4,7 @@ namespace Biblioteca_uts.Models
 {
     public class UsariosModels
     {
+        //1
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public int Identificador { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
