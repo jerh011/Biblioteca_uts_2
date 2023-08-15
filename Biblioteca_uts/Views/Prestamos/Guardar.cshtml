@@ -14,18 +14,23 @@
                 <form class="form" asp-action="Guardar" asp-controller="Prestamos" method="post">
                     <!--ADQUISICION-->
                     <div class="input-group1">
+                        <label class="control-label">Identificador</label><br>
                         <input type="number" name="Identificador" asp-for="Identificador" placeholder="Identificador del Usuario" required>
+                        <span asp-validation-for="Identificador" class="text-danger"></span>
                     </div>
                     <!--TITULO-->
                     <div class="input-group1">
+                        <label class="control-label">Prestamo</label><br>
                         <input type="date" name="Fecha_prestamo" asp-for="Fecha_prestamo" placeholder="Fecha del prestamo">
                     </div>
                     <!--Fecha-->
                     <div class="input-group1">
+                        <label class="control-label">Devolucion</label><br>
                         <input type="date" asp-for="Fecha_devolucion" name="Fecha_devolucion" placeholder="Fecha de la devolucion">
                     </div>
 
                     <div class="input-group1">
+                        <label class="control-label">Numero de adquisicion</label><br>
                         <input type="number" name="No_Adquisicion" asp-for="No_Adquisicion" placeholder="No_Adquisicion DEL LIBRO" required>
                     </div>
                     
