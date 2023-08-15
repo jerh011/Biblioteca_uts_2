@@ -94,7 +94,7 @@ as begin
 Declare @No_Adquisicion int
 select @No_Adquisicion =No_Adquisicion from inserted 
  update dbo.Libro
-    SET Estatus = 'ocupado'
+    SET Estatus = 'Ocupado'
     WHERE No_Adquisicion=@No_Adquisicion
 
 end
@@ -108,7 +108,7 @@ as begin
 Declare @No_Adquisicion int
 select @No_Adquisicion =No_Adquisicion from deleted
  update dbo.Libro
-    SET Estatus = 'disponible'
+    SET Estatus = 'Disponible'
     WHERE No_Adquisicion=@No_Adquisicion
 
 end
