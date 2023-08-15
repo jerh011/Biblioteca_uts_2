@@ -6,38 +6,7 @@ namespace Biblioteca_uts.Datos
 {
     public class PrestamosDatos
     {
-     /*   public List<PrestamosModels> Listar()
-        {
-            List<PrestamosModels> Lista = new List<PrestamosModels>();
-            var cn = new Conexion();
-
-            using (var conexion = new SqlConnection(cn.getCadenaSql()))
-            {
-                conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_Listar_Prestamos", conexion);
-                cmd.CommandType = CommandType.StoredProcedure;
-                using (var dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        Lista.Add(new PrestamosModels()
-                        {
-                            IdPrestamo = Convert.ToInt32(dr["Id_Prestamo"]),
-                            Identificador = Convert.ToInt32(dr["Identificador"]),
-                            Fecha_prestamo = dr.GetDateTime(dr.GetOrdinal("Fecha_prestamo")),
-                            Fecha_devolucion = dr.GetDateTime(dr.GetOrdinal("Fecha_devolucion")),
-                            No_Adquisicion = Convert.ToInt32(dr["No_Adquisicion"])
-                        }
-                        );
-                    }
-                }
-
-               
-                 
-            }
-            return Lista;
-        }
-        */
+  
         public  List<CMT_PrestamoModels> Listar2()
         {
             List<CMT_PrestamoModels> Lista = new List<CMT_PrestamoModels>();
