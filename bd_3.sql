@@ -70,7 +70,7 @@ go
 
 create view View_Prestamo 
 as
-select Pre.Id_Prestamo, Us.Identificador,Us.Nombres,Us.ApePa,Pre.Fecha_prestamo,Pre.Fecha_devolucion,
+select Pre.Id_Prestamo ,Us.Identificador,Us.Nombres,Us.ApePa,Pre.Fecha_prestamo,Pre.Fecha_devolucion,
 Lib.Titulo,Lib.Clasificacion,Lib.IBSN from  Usuario as Us
 inner join Prestamo as Pre
 on Us.Identificador=Pre.Identificador 
@@ -84,36 +84,7 @@ create procedure Sp_Prestamo
  select * from View_Prestamo
  
  exec Sp_Prestamo
-
- select * from Prestamo
 --###########################################################################################--
-create trigger TR_CambiarAEstadoOcupado
-on Prestamo
-for INSERT
-as begin
-Declare @No_Adquisicion int
-select @No_Adquisicion =No_Adquisicion from inserted 
- update dbo.Libro
-    SET Estatus = 'Ocupado'
-    WHERE No_Adquisicion=@No_Adquisicion
-
-end
-go
-
-
-create trigger TR_CambiarAEstadoDisponible
-on Prestamo
-for Delete
-as begin
-Declare @No_Adquisicion int
-select @No_Adquisicion =No_Adquisicion from deleted
- update dbo.Libro
-    SET Estatus = 'Disponible'
-    WHERE No_Adquisicion=@No_Adquisicion
-
-end
-go
-
 
 
 
