@@ -3,6 +3,7 @@
     ViewData["Title"] = "Inventario";
 
 }
+
 <div class="card col-8">
     <div class="card-header">
         Lista de Usuarios
@@ -20,9 +21,9 @@
                     <th>Colonia</th>
                     <th>NroCasa</th>
                     <th>tipo</th>
-                 
                     <th>Usuario</th>
-                </tr>
+                    <th>tipo</th>
+                    <th>Libro</th>
             </thead>
             <tbody>
                 @foreach (var item in Model)
@@ -36,11 +37,13 @@
                         <td>@item.Colonia</td>
                         <td>@item.NroCasa</td>
                         <td>@item.tipo</td>
-                        
                         <td>@item.Usuario</td>
+                        
                         <td>
+                            <a asp-action="Prestados" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Prestados</a>
                             <a asp-action="Editar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Editar</a>
                             <a asp-action="Eliminar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Eliminar</a>
+                            
                         </td>
                     </tr>
                 }

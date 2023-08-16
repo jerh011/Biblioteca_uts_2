@@ -9,10 +9,13 @@ namespace Biblioteca_uts.Controllers
 
         //Datos/ContactoDatos
         UsuarioDatos _Usuario = new UsuarioDatos();
+        LibrosDatos _Libros = new LibrosDatos();
         public IActionResult Listar()
         {
-            var lista = _Usuario.Listar();
+            var lista2 = _Libros.Listar();
+            ViewBag.Lista = lista2;
 
+            var lista = _Usuario.Listar();
             return View(lista);
         }
         //##############################

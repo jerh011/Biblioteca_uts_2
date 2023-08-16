@@ -150,5 +150,23 @@ where IBSN = @ibsen
 
 end
 go
+---########vista usuario#############----
 
+create procedure Sp_Usuario_P
+(
+@Identificador int
+)
+ as 
+select Us.Identificador, Pre.Id_Prestamo, Lib.No_Adquisicion ,Lib.Titulo ,Lib.IBSN ,Lib.Clasificacion, Lib.No_Estante
+ from  Usuario as Us
+inner join Prestamo as Pre
+on Us.Identificador=Pre.Identificador 
+inner join Libro as Lib
+on Pre.No_Adquisicion=Lib.No_Adquisicion
+ where Us.Identificador=@Identificador
+ go
+
+ exec Sp_Usuario_P
+ @Identificador=1
+	
 
