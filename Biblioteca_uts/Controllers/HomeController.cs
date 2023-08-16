@@ -28,5 +28,13 @@ namespace Biblioteca_uts.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
+
+        public IActionResult Inicio()
+        {
+            return View();
+        }
     }
 }

@@ -161,5 +161,44 @@ namespace Biblioteca_uts.Datos
             }
             return respuesta;
         }
+        public List<CMT_LibroModels> Listar2(int Us_Identificador)
+        {
+            List<CMT_LibroModels> Lista = new List<CMT_LibroModels>();
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSql()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("Sp_Usuario_P", conexion);
+                cmd.Parameters.AddWithValue("Identificador", Us_Identificador);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Lista.Add(new CMT_LibroModels()
+                        {
+
+                            Us_Identificador = Convert.ToInt32(dr["Identificador"]),
+                            Pre_Id_Prestamo = Convert.ToInt32(dr["Id_Prestamo"]),
+                            Lib_NoAdquisicion = Convert.ToInt32(dr["No_Adquisicion"]),
+                            Lib_Titulo = dr["Titulo"].ToString(),
+                            Lib_IBSN = dr["IBSN"].ToString(),
+                            Lib_Clasificacion = dr["Clasificacion"].ToString(),
+                            Lib_No_Estante = dr["No_Estante"].ToString()
+
+
+                        }
+                        );
+                    }
+                }
+            }
+            return Lista;
+        }
+
+
+
+
+
     }
 }

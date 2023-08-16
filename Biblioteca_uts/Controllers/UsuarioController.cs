@@ -12,9 +12,6 @@ namespace Biblioteca_uts.Controllers
         LibrosDatos _Libros = new LibrosDatos();
         public IActionResult Listar()
         {
-            var lista2 = _Libros.Listar();
-            ViewBag.Lista = lista2;
-
             var lista = _Usuario.Listar();
             return View(lista);
         }
@@ -85,21 +82,22 @@ namespace Biblioteca_uts.Controllers
 
         }
         //#############################################################
-        public IActionResult VerPresatamo(int Identificador)
+        public IActionResult VerPrestamo(int Identificador)
         {
-            
-            return View();
-
+            var _contacto = _Libros.Listar2(Identificador);
+            return View(_contacto);
         }
 
         [HttpPost]
-        public IActionResult VerPresatamo(UsariosModels mode)
+        public IActionResult VerPrestamo(CMT_LibroModels model)
         {
-
-            return View();
-
+            //para obtener los datos que se editadoen del formulario y enviarlos  en la base de datos 
+           
+            var respuesta = _Libros.Listar2(model.Us_Identificador);
+          
+                return View();
+            
         }
-
 
 
 

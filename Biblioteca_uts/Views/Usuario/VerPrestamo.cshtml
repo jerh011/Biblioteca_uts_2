@@ -1,0 +1,52 @@
+﻿@model List<CMT_LibroModels>;
+@{
+    ViewData["Title"] = "Inventario";
+
+}
+
+<div class="card col-8">
+    <div class="card-header">
+        Lista de Usuarios
+    </div>
+    <div class="card-body">
+ 
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Identificador</th>
+                    <th>ID Prestamo</th>
+                    <th>Numero de adquisicion</th>
+                    <th>Titulo</th>
+                    <th>IBSN</th>
+                    <th>Clasificacion</th>
+                    <th>Numero de estante</th>
+                    
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Us_Identificador</td>
+                        <td>@item.Pre_Id_Prestamo</td>
+                        <td>@item.Lib_NoAdquisicion </td>
+                        <td>@item.Lib_Titulo </td>
+                        <td>@item.Lib_IBSN </td>
+                        <td>@item.Lib_Clasificacion</td>
+                        <td>@item.Lib_No_Estante </td>
+                      
+
+
+
+                        <td>
+                            <a asp-action="Listar" asp-controller="Usuario" class="btn btn-primary btn-sm">Regresar a la lista</a>
+                       
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
