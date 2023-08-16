@@ -167,6 +167,8 @@ on Pre.No_Adquisicion=Lib.No_Adquisicion
  go
 
  exec Sp_Usuario_P
- @Identificador=1
+ @Identificador=2
 	
+
+
 
