@@ -84,6 +84,23 @@ namespace Biblioteca_uts.Controllers
             }
 
         }
+        //#############################################################
+        public IActionResult VerPresatamo(int Identificador)
+        {
+            
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult VerPresatamo(UsariosModels mode)
+        {
+
+            return View();
+
+        }
+
+
 
 
     }
