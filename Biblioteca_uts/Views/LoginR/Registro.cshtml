@@ -1,0 +1,59 @@
+﻿@model Biblioteca_uts.Models.UsariosModels
+
+@{
+    ViewData["Title"] = "Guardar";
+}
+
+<div class="modal-body p-5 pt-0">
+    <form class="form" asp-action="Registrar" asq-controller="LoginR" method="post">
+
+        <!--Identificador-->
+        <div class="input-group1">
+            <input type="number" name="Identificador" asp-for="Identificador" placeholder="Identificador" required>
+        </div>
+        <!--Nombres-->
+        <div class="input-group1">
+            <input type="text" name="Nombres" asp-for="Nombres" placeholder="Nombres" required>
+        </div>
+        <!--ApePa-->
+        <div class="input-group1">
+            <input type="text" asp-for="ApePa" name="ApePa" placeholder="ApePa" required>
+        </div>
+        <!--ApeMa-->
+        <div class="input-group1">
+            <input type="text" name="ApeMa" asp-for="ApeMa" placeholder="ApeMa" required>
+        </div>
+        <!--Calle-->
+        <div class="input-group1">
+            <input type="text" name="Calle" asp-for="Calle" placeholder="Calle" required>
+        </div>
+        <!--Colonia-->
+        <div class="input-group1">
+            <input type="text" name="Colonia" asp-for="Colonia" placeholder="Colonia" required>
+        </div>
+        <!--NroCasa-->
+        <div class="input-group1">
+            <input type="text" name="NroCasa" asp-for="NroCasa" placeholder="NroCasa" required>
+        </div>
+        <!--tipo-->
+        <div class="input-group1">
+            <input type="text" name="tipo" asp-for="tipo" placeholder="tipo" required>
+        </div>
+        <!--Contraseña-->
+        <div class="input-group1">
+            <input type="password" name="Contraseña" asp-for="Contraseña" placeholder="Contraseña" required>
+        </div>
+        <!--Id_Lector/Usuario/-->
+        <div class="input-group1">
+            <input type="text" name="Usuario" asp-for="Usuario" placeholder="Usuario" required>
+        </div>
+
+        <!--boton de registro-->
+        <br>
+        <div class="col-md-4 mb-3">
+            <button type="submit" class="sign">REGISTRAR</button>
+        </div>
+
+    </form>
+    
+</div>
