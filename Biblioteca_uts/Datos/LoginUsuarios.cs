@@ -10,7 +10,7 @@ namespace Biblioteca_uts.Datos
         public bool Registro(UsariosModels model)
         {
             bool respuesta;
-            if (existeIdentificador(model.Identificador))
+            if (existeUsuario(model.Contraseña))
             {
                 try
                 {
@@ -50,21 +50,21 @@ namespace Biblioteca_uts.Datos
 
             return respuesta;
         }
-        public bool existeIdentificador(int Identificador)
+        public bool existeUsuario(string Usuario)
         {
             string eIdentificador = "";
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_validarUsuario", conexion);
-                cmd.Parameters.AddWithValue("Identificador", Identificador);
+                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario_existente", conexion);
+                cmd.Parameters.AddWithValue("Usuario", Usuario);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
                     while (dr.Read())
                     {
-                        eIdentificador = dr["identificador"].ToString();
+                        eIdentificador = dr["Usuario"].ToString();
 
                     }
                 }
@@ -80,17 +80,22 @@ namespace Biblioteca_uts.Datos
             }
 
         }
-        public UsariosModels ValidarUsuario(string Identificador, string contraseña)
+        public UsariosModels ValidarUsuario(string Usuario, string contraseña)
         {
+            UsariosModels usuario = new UsariosModels();
+
+
             UsariosModels _usuario = new UsariosModels();
+
+
             var cn = new Conexion();
-         
+
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
                 SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", conexion);
-                cmd.Parameters.AddWithValue("identificador", Identificador);
-                cmd.Parameters.AddWithValue("contraseña", contraseña);
+                cmd.Parameters.AddWithValue("Usuario", Usuario);
+                cmd.Parameters.AddWithValue("Contraseña", contraseña);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
                 {
@@ -98,18 +103,22 @@ namespace Biblioteca_uts.Datos
                     {
                         usuario.Identificador = Convert.ToInt32(dr["Identificador"]);
                         usuario.Nombres = dr["Nombres"].ToString();
-                        usuario.ApePa = dr["ApPa"].ToString();
-                        usuario.ApeMa = dr["ApMA"].ToString();
+                        usuario.ApePa = dr["ApePa"].ToString();
+                        usuario.ApeMa = dr["ApeMa"].ToString();
                         usuario.Calle = dr["calle"].ToString();
                         usuario.Colonia = dr["Colonia"].ToString();
                         usuario.NroCasa = dr["NroCasa"].ToString();
                         usuario.tipo = dr["Tipo"].ToString();
                         usuario.Contraseña = dr["Contraseña"].ToString();
-                        usuario.Usuario = dr["Usuario"].ToString();
+                        usuario.Usuario = dr["Id_Lector"].ToString();
                     }
                 }
             }
-            return _usuario;
+
+            return usuario;
+
+
+
 
         }
         public bool CambiarContraseña(string Identificador, string contraseña)
@@ -122,8 +131,8 @@ namespace Biblioteca_uts.Datos
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("sp_CambiarContraseña", conexion);
-                    cmd.Parameters.AddWithValue("identificador", Identificador);
-                    cmd.Parameters.AddWithValue("contraseña", contraseña);
+                    cmd.Parameters.AddWithValue("Usuario", Identificador);
+                    cmd.Parameters.AddWithValue("Contraseña", contraseña);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
@@ -141,3 +150,4 @@ namespace Biblioteca_uts.Datos
         }
     }
 }
+
