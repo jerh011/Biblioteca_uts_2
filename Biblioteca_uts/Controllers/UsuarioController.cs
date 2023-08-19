@@ -1,6 +1,7 @@
 ﻿using Biblioteca_uts.Models;
 using Biblioteca_uts.Datos;
 using Microsoft.AspNetCore.Mvc;
+using Biblioteca_uts.Recurso;
 
 namespace Biblioteca_uts.Controllers
 {
@@ -10,6 +11,7 @@ namespace Biblioteca_uts.Controllers
         //Datos/ContactoDatos
         UsuarioDatos _Usuario = new UsuarioDatos();
         LibrosDatos _Libros = new LibrosDatos();
+
         public IActionResult Listar()
         {
             var lista = _Usuario.Listar();
@@ -24,15 +26,34 @@ namespace Biblioteca_uts.Controllers
         [HttpPost]
         public IActionResult Guardar(UsariosModels model)
         {
-            var UsuarioCreado = _Usuario.GuardarUsuario(model);
-            if (UsuarioCreado)
-            {
-                return RedirectToAction("Listar");
-            }
-            else
+            /*  var UsuarioCreado = _Usuario.GuardarUsuario(model);
+              if (UsuarioCreado)
+              {
+                  return RedirectToAction("Listar");
+              }
+              else
+              {
+                  return View();
+              }*/
+            if (!ModelState.IsValid)
             {
                 return View();
             }
+            model.Contraseña = utilidades.EncriptarClave(model.Contraseña);
+            bool crearUsuario = _Usuario.GuardarUsuario(model);
+            if (!crearUsuario)
+            {
+                //retornar una alerta warning para aclarar que el correo ya esta existente
+                ViewData["Mensaje"] = "El ID ya se encuentra en uso";
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Listar");
+            }
+
+
+
 
         }
         //##############################
@@ -50,6 +71,7 @@ namespace Biblioteca_uts.Controllers
             {
                 return View();
             }
+            model.Contraseña = utilidades.EncriptarClave(model.Contraseña);
             var respuesta = _Usuario.EditarUsuario(model);
             if (respuesta)
             {
