@@ -4,7 +4,8 @@ go
 use biblioteca
 go
 
-create table dbo.Usuario (
+create table dbo.Usuario
+(
 	Identificador INT Primary key  not null,
 	Nombres varchar(40)not null,
 	ApePa varchar(40)not null,
@@ -13,11 +14,12 @@ create table dbo.Usuario (
 	Colonia varchar(40)null,
 	NroCasa varchar(10)null,
 	tipo varchar(10) not null,
-	Contraseña varchar (16) not null,
+	Contraseña varchar (50) not null,
 	Id_Lector varchar (16)not null,
 );
 
-Create table dbo.Libro(
+create table dbo.Libro
+(
 	No_Adquisicion INT Primary key not null,
 	Titulo varchar (40) not null,
 	Fecha_adquisicion date null,
@@ -30,7 +32,8 @@ Create table dbo.Libro(
 	No_factura varchar(20) null 
 ); 
 
-create table dbo.Prestamo(
+create table dbo.Prestamo
+(
 	Id_Prestamo INT Primary key identity (1,1)  not null,
 	Identificador int not null,
 	Fecha_prestamo date not null,

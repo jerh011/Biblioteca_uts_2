@@ -1,6 +1,5 @@
 use biblioteca
 go
------Procesos almacenados------
 create procedure Sp_Modificar_Prestamos
 (	
 	@Id_Prestamo INT ,
@@ -84,7 +83,7 @@ create procedure Sp_Prestamo
  as 
  select * from View_Prestamo
  
- exec Sp_Prestamo
+go
 --###########################################################################################--
 --###########################################################################################--
 create trigger TR_CambiarAEstadoOcupado
@@ -166,9 +165,33 @@ on Pre.No_Adquisicion=Lib.No_Adquisicion
  where Us.Identificador=@Identificador
  go
 
- exec Sp_Usuario_P
- @Identificador=2
-	
+ --==========================================login======================================================
+ create procedure sp_ValidarUsuario(
+@Usuario varchar (50),
+@Contraseña varchar (50)
+)
+as
+begin
+	select * from Usuario where Id_Lector=@Usuario and Contraseña=@Contraseña
+end
+go
 
+create procedure sp_ValidarUsuario_existente
+(
+@Usuario varchar (50))
+as
+begin
+	select * from Usuario where Id_Lector=@Usuario;
+end
+go
 
+create procedure sp_CambiarClave
+(
+@Usuario varchar (50),
+@Contraseña varchar (50)
+)
+as
+begin
+	update Usuario set Contraseña=@Contraseña where Id_Lector=@Usuario
+end
 

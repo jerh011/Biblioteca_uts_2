@@ -82,8 +82,9 @@ namespace Biblioteca_uts.Datos
         }
         public UsariosModels ValidarUsuario(string Identificador, string contraseña)
         {
-            UsariosModels usuario = new UsariosModels();
+            UsariosModels _usuario = new UsariosModels();
             var cn = new Conexion();
+         
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
@@ -108,7 +109,7 @@ namespace Biblioteca_uts.Datos
                     }
                 }
             }
-            return usuario;
+            return _usuario;
 
         }
         public bool CambiarContraseña(string Identificador, string contraseña)

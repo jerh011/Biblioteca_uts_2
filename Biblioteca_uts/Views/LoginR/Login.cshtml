@@ -10,7 +10,7 @@
 
 <div class="form-floating mb-3">
 
-<input type="number" class="form-control rounded-3" id="floatingInput" placeholder="Identificador" name="Identificador" required>
+<input type="text" class="form-control rounded-3" asp-for="Usuario" placeholder="Usuario o correo" name="Usuario" required>
 
 <label for="floating Input">Identificador</label>
 
@@ -18,7 +18,7 @@
 
 <div class="form-floating mb-3">
 
-<input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="clave" required>
+        <input type="password" class="form-control rounded-3" asp-for="Contraseña" id="floatingPassword" placeholder="Password" name="Contraseña" required>
 
 <label for="floatingPassword">Clave</label>
 
@@ -26,6 +26,10 @@
 
 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Iniciar Sesion</button>
 
+<div>
+        <a class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" asp-area="" asp-controller="LoginR" asp-action="Registro">Registrar</a>
+
+</div>
 @if (ViewData["Mensaje"]!=null)
 { 
       <div class="alert alert-danger" role="alert">

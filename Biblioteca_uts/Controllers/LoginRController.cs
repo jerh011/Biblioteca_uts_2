@@ -45,10 +45,14 @@ namespace Biblioteca_uts.Controllers
         {
             return View();
         }
+
+
+
+        //7777777777777777777777777777777777777777777777777777777777777777777777777777777
         [HttpPost]
-        public async Task<IActionResult> Login(string Identificador, string contraseña)
+        public async Task<IActionResult> Login(string Usuario, string Contraseña)
         {
-            UsariosModels usarios = LogR.ValidarUsuario(Identificador, utilidades.EncriptarClave(contraseña));
+            UsariosModels usarios = LogR.ValidarUsuario(Usuario, utilidades.EncriptarClave(Contraseña));
             if (usarios.Identificador == 0)
             {
                 ViewData["Mensaje"] = "El correo o clave son incorrecta";
@@ -79,12 +83,12 @@ namespace Biblioteca_uts.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CambiarClave(string Identificador, string contraseña)
+        public IActionResult CambiarClave(string Usuario, string contraseña)
         {
-            bool respuesta = LogR.CambiarContraseña(Identificador, utilidades.EncriptarClave(contraseña));
+            bool respuesta = LogR.CambiarContraseña(Usuario, utilidades.EncriptarClave(contraseña));
             if (!respuesta)
             {
-                ViewData["Mensaje"] = "El Id no existe";
+                ViewData["Mensaje"] = "El Usuario no existe";
                 return View();
             }
             else
