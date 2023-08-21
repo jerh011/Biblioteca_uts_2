@@ -172,7 +172,7 @@ on Pre.No_Adquisicion=Lib.No_Adquisicion
 )
 as
 begin
-	select * from Usuario where Id_Lector=@Usuario and Contraseña=@Contraseña
+	select * from Usuario where Usuario=@Usuario and Contraseña=@Contraseña
 end
 go
 
@@ -181,7 +181,7 @@ create procedure sp_ValidarUsuario_existente
 @Usuario varchar (50))
 as
 begin
-	select * from Usuario where Id_Lector=@Usuario;
+	select * from Usuario where Usuario=@Usuario;
 end
 go
 
@@ -192,6 +192,69 @@ create procedure sp_CambiarClave
 )
 as
 begin
-	update Usuario set Contraseña=@Contraseña where Id_Lector=@Usuario
+	update Usuario set Contraseña=@Contraseña where Usuario=@Usuario
 end
+---########################################--
 
+create  database encriptacion 
+
+use encriptacion 
+--SE CREA LA LLAVE MKAESTRA PARA LA ENCRIPTACION
+create MASTER KEY ENCRYPTION BY PASSWORD ='JERH011';
+GO
+--###################################################----
+--SE CREA UNA LLAVE SIMETRICA  CON EL ALGORITMO "AES_256"
+cREATE SYMMETRIC KEY JERH011---ESTO VA EN EL PARENTESIS QUE ESTA MAS ABAJO EN EL PASO 3
+with algorithm = AES_256
+ENCRYPTION  BY PASSWORD ='JERH011';
+GO
+
+
+--##########################################################-----
+-- Cifrar datos usando ENCRYPTBYKEY
+--DECLARAMOS VARIABLES
+DECLARE @NUMEROTARGETA NVARCHAR(100) ='1234-5678-9012-3456';
+DECLARE @NUMERTARJETACIFRADA VARBINARY (200);
+--ABRIMOS LA SIMETRRIA DE DE LLAVES?
+OPEN SYMMETRIC KEY JERH011 
+	DECRYPTION BY PASSWORD ='JERH011';
+	SET @NUMERTARJETACIFRADA=ENCRYPTBYKEY(KEY_GUID('JERH011'),@NUMEROTARGETA);--ESTE
+	
+SELECT @NUMERTARJETACIFRADA AS NUMERTARJETACIFRADA;
+GO 
+--############################################################---
+--PASOS PARA DESIFRAR 
+DECLARE @NUMEROTARJETACIFRADA VARBINARY(200)=0x0018E4C5AA0E204784F166246530DECC020000003534F72692C25DC1C44BBE65541AC8B45BB97ADE995C6EA5873F536EB305C42219DF3295D5478B125175FE333EBA1CCEB0C3B9AB15F6DBD234F179652BEFFCE4; 
+DECLARE @NUMEROTARJETADECIFRADA NVARCHAR(100);
+OPEN SYMMETRIC KEY JERH011
+	DECRYPTION BY PASSWORD='JERH011';
+SET @NUMEROTARJETADECIFRADA=CONVERT(nvarchar(100),
+DECRYPTBYKEY(@NUMEROTARJETACIFRADA));
+SELECT @NUMEROTARJETADECIFRADA AS NUMEROTARGETADECIFRADA;
+--######################################################--
+create procedure sp_ValidarUsuario_con_correo(
+@Correo varchar (50),
+@Contraseña varchar (50)
+)
+as
+begin
+	select * from Usuario where Correo=@Correo and Contraseña=@Contraseña
+end
+go
+
+create procedure sp_ValidarCorreo(
+@Correo varchar (50))
+as
+begin
+	select * from Usuario where Correo=@Correo;
+end
+go
+
+create procedure sp_CambiarClave(
+@Correo varchar(50),
+@Contraseña varchar(50))
+as
+begin
+	update Usuario set Contraseña=@Contraseña where Correo=@Correo
+end
+--####################################

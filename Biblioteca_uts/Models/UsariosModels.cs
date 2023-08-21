@@ -14,6 +14,8 @@ namespace Biblioteca_uts.Models
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string ApeMa { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
+        public string Correo { get; set; }
+        [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string Calle { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string Colonia { get; set; }

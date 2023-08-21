@@ -24,12 +24,13 @@ namespace Biblioteca_uts.Datos
                         cmd.Parameters.AddWithValue("Nombres", model.Nombres);
                         cmd.Parameters.AddWithValue("ApePa", model.ApePa);
                         cmd.Parameters.AddWithValue("ApeMa", model.ApeMa);
+                        cmd.Parameters.AddWithValue("Correo",model.Correo);
                         cmd.Parameters.AddWithValue("Calle", model.Calle);
                         cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                         cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
                         cmd.Parameters.AddWithValue("tipo", model.tipo);
                         cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
-                        cmd.Parameters.AddWithValue("Id_Lector", model.Usuario);//Id_Lector
+                        cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.ExecuteNonQuery();
@@ -105,12 +106,13 @@ namespace Biblioteca_uts.Datos
                         usuario.Nombres = dr["Nombres"].ToString();
                         usuario.ApePa = dr["ApePa"].ToString();
                         usuario.ApeMa = dr["ApeMa"].ToString();
+                        usuario.Correo = dr["Correo"].ToString();
                         usuario.Calle = dr["calle"].ToString();
                         usuario.Colonia = dr["Colonia"].ToString();
                         usuario.NroCasa = dr["NroCasa"].ToString();
                         usuario.tipo = dr["Tipo"].ToString();
                         usuario.Contraseña = dr["Contraseña"].ToString();
-                        usuario.Usuario = dr["Id_Lector"].ToString();
+                        usuario.Usuario = dr["Usuario"].ToString();
                     }
                 }
             }
@@ -148,6 +150,85 @@ namespace Biblioteca_uts.Datos
 
 
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        public bool existeCorreo(string Correo)
+        {
+            string eIdentificador = "";
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.getCadenaSql()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario_con_correo", conexion);
+                cmd.Parameters.AddWithValue("Correo", Correo);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        eIdentificador = dr["Correo"].ToString();
+
+                    }
+                }
+
+            }
+            if (eIdentificador == "")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public UsariosModels ValidarCorreo(string Correo, string contraseña)
+        {
+            UsariosModels usuario = new UsariosModels();
+
+
+            UsariosModels _usuario = new UsariosModels();
+
+
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSql()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", conexion);
+                cmd.Parameters.AddWithValue("Correo", Correo);
+                cmd.Parameters.AddWithValue("Contraseña", contraseña);
+                cmd.CommandType = CommandType.StoredProcedure;
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        usuario.Identificador = Convert.ToInt32(dr["Identificador"]);
+                        usuario.Nombres = dr["Nombres"].ToString();
+                        usuario.ApePa = dr["ApePa"].ToString();
+                        usuario.ApeMa = dr["ApeMa"].ToString();
+                        usuario.Correo = dr["Correo"].ToString();
+                        usuario.Calle = dr["calle"].ToString();
+                        usuario.Colonia = dr["Colonia"].ToString();
+                        usuario.NroCasa = dr["NroCasa"].ToString();
+                        usuario.tipo = dr["Tipo"].ToString();
+                        usuario.Contraseña = dr["Contraseña"].ToString();
+                        usuario.Usuario = dr["Usuario"].ToString();
+                    }
+                }
+            }
+
+            return usuario;
+
+
+
+
+        }
+
+
+
+
+
+
     }
 }
 

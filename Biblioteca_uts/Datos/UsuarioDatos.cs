@@ -29,6 +29,7 @@ namespace Biblioteca_uts.Datos
                             Nombres = dr["Nombres"].ToString(),
                             ApePa = dr["ApePa"].ToString(),
                             ApeMa = dr["ApeMa"].ToString(),
+                            Correo = dr["Correo"].ToString(),
                             Calle = dr["Calle"].ToString(),
                             Colonia = dr["Colonia"].ToString(),
                             NroCasa = dr["NroCasa"].ToString(),
@@ -61,6 +62,7 @@ namespace Biblioteca_uts.Datos
                         Usuario.Nombres = dr["Nombres"].ToString();
                         Usuario.ApePa = dr["ApePa"].ToString();
                         Usuario.ApeMa = dr["ApeMa"].ToString();
+                        Usuario.Correo = dr["Correo"].ToString();
                         Usuario.Calle = dr["Calle"].ToString();
                         Usuario.Colonia = dr["Colonia"].ToString();
                         Usuario.NroCasa = dr["NroCasa"].ToString();
@@ -90,6 +92,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("Nombres", model.Nombres);
                     cmd.Parameters.AddWithValue("ApePa", model.ApePa);
                     cmd.Parameters.AddWithValue("ApeMa", model.ApeMa);
+                    cmd.Parameters.AddWithValue("Correo",model.Correo);
                     cmd.Parameters.AddWithValue("Calle", model.Calle);
                     cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
@@ -124,6 +127,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("Nombres", model.Nombres);
                     cmd.Parameters.AddWithValue("ApePa", model.ApePa);
                     cmd.Parameters.AddWithValue("ApeMa", model.ApeMa);
+                    cmd.Parameters.AddWithValue("Correo", model.Correo);
                     cmd.Parameters.AddWithValue("Calle", model.Calle);
                     cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);

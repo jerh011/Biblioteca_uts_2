@@ -9,25 +9,27 @@ create procedure Sp_Modificar_Usuario
 	@Identificador INT null,
 	@Nombres varchar(40) null,
 	@ApePa varchar(40) null,
-	@ApeMa varchar(40) null,	
+	@ApeMa varchar(40) null,
+	@Correo varchar(30),
 	@Calle varchar(40)null,
 	@Colonia varchar(40)null,
 	@NroCasa varchar(10)null,
 	@tipo varchar(10)  null,
 	@Contraseña varchar (50)  null,
-	@Id_Lector varchar (16) null
+	@Usuario varchar (16) null
 	)
 	as BEGIN
 	 update dbo.Usuario set 
 	Nombres=@Nombres,
 	ApePa= @ApePa,
 	ApeMa=@ApeMa,
+	Correo=@Correo,
 	Calle=@Calle,
 	Colonia=@Colonia,
 	NroCasa=@NroCasa,
 	tipo=@tipo,
 	Contraseña=@Contraseña,
-	Id_Lector=@Id_Lector
+	Usuario=@Usuario
 	where Identificador = @Identificador
 	end
 	go
@@ -65,13 +67,14 @@ go
 	@Identificador INT  null,
 	@Nombres varchar(40) null,
 	@ApePa varchar(40) null,
-	@ApeMa varchar(40) null,	
+	@ApeMa varchar(40) null,
+	@Correo varchar(30) null,
 	@Calle varchar(40)null,
 	@Colonia varchar(40)null,
 	@NroCasa varchar(10)null,
 	@tipo varchar(10)  null,
 	@Contraseña varchar (50)  null,
-	@Id_Lector varchar (16) null
+	@Usuario varchar (16) null
 	)
 	as BEGIN
 	insert into dbo.Usuario values (
@@ -84,7 +87,7 @@ go
 	@NroCasa,
 	@tipo,
 	@Contraseña,
-	@Id_Lector
+	@Usuario
 	)
 	end
 	go

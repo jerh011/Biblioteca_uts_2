@@ -20,6 +20,7 @@ namespace Biblioteca_uts.Controllers
             return View();
         }
         [HttpPost]
+        //agregar un if por si el usuario contiene un "@" para no registrarse
         public IActionResult Registro(UsariosModels model)
         {
             if (!ModelState.IsValid)
@@ -31,7 +32,7 @@ namespace Biblioteca_uts.Controllers
             if (!crearUsuario)
             {
                 //retornar una alerta warning para aclarar que el correo ya esta existente
-                ViewData["Mensaje"] = "El ID ya se encuentra en uso";
+                ViewData["Mensaje"] = "El Coreo o El ID ya se encuentra en uso";
                 return View();
             }
             else
@@ -48,7 +49,7 @@ namespace Biblioteca_uts.Controllers
 
 
 
-        //7777777777777777777777777777777777777777777777777777777777777777777777777777777
+        //agregar un if por si el usuario contiene un "@" paara si quiere loguearse con correo o usuario 
         [HttpPost]
         public async Task<IActionResult> Login(string Usuario, string Contraseña)
         {
@@ -83,6 +84,7 @@ namespace Biblioteca_uts.Controllers
             return View();
         }
         [HttpPost]
+
         public IActionResult CambiarClave(string Usuario, string contraseña)
         {
             bool respuesta = LogR.CambiarContraseña(Usuario, utilidades.EncriptarClave(contraseña));

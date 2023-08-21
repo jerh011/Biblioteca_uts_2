@@ -10,12 +10,13 @@ create table dbo.Usuario
 	Nombres varchar(40)not null,
 	ApePa varchar(40)not null,
 	ApeMa varchar(40),	
+	Correo varchar(30),
 	Calle varchar(40)null,
 	Colonia varchar(40)null,
 	NroCasa varchar(10)null,
 	tipo varchar(10) not null,
 	Contraseña varchar (50) not null,
-	Id_Lector varchar (16)not null,
+	Usuario varchar (16)not null,
 );
 
 create table dbo.Libro
