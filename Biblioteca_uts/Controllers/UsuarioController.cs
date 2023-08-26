@@ -44,7 +44,7 @@ namespace Biblioteca_uts.Controllers
             if (!crearUsuario)
             {
                 //retornar una alerta warning para aclarar que el correo ya esta existente
-                ViewData["Mensaje"] = "El ID ya se encuentra en uso";
+                ViewData["Mensaje"] = "La ID o el usuario ya se encuentra en uso ";
                 return View();
             }
             else

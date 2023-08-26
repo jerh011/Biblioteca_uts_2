@@ -1,53 +1,102 @@
 ﻿@model List<LibrosModel>;
+
 @{
     ViewData["Title"] = "Listar";
-
+    Layout = "_Layout";
 }
-<div class="card col-8">
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+    }
+
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #272727;
+        border-bottom: 1px solid #333;
+        color: #ffcc00;
+    }
+
+    .btn-primary {
+        background-color: #ffcc00;
+        border-color: #ffcc00;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    th, td {
+        border-color: #333;
+        color: #fff;
+    }
+
+    br {
+        margin: 20px 0;
+    }
+</style>
+<div class="card col-12 col-md-8">
     <div class="card-header">
-        Lista de Libro
+        Lista de Libros
     </div>
     <div class="card-body">
-        <a asp-action="Guardar" asp-asp-controller="Libros" class="btn btn-primary btn-sm">Crear nuevo</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>No_Adquisicion</th>
-                    <th>Titulo</th>
-                    <th>Fecha_adquisicion</th>
-                    <th>Ibsn</th>
-                    <th>Clasificacion</th>
-                    <th>No_Estante</th>
-                    <th>Cantidad</th>
-                    <th>Estatus</th>
-                    <th>Procedencia</th>
-                    <th>No_factura</th>
-                </tr>
-        </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        <a asp-action="Guardar" asp-controller="Libros" class="btn btn-primary btn-sm mb-3">Crear nuevo</a>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@item.No_Adquisicion</td>
-                        <td>@item.Titulo</td>
-                        <td>@item.Fecha_adquisicion</td>
-                        <td>@item.Ibsn</td>
-                        <td>@item.Clasificacion</td>
-                        <td>@item.No_Estante</td>
-                        <td>@item.Cantidad</td>
-                        <td>@item.Estatus</td>
-                        <td>@item.Procedencia</td>
-                        <td>@item.No_factura</td>
-
-                        <td>
-                            <a asp-action="Editar" asp-asp-controller="Libros" asp-route-No_Adquisicion="@item.No_Adquisicion" class="btn btn-primary btn-sm">Editar</a>
-                            <a asp-action="Eliminar" asp-asp-controller="Libros" asp-route-No_Adquisicion="@item.No_Adquisicion" class="btn btn-primary btn-sm">Eliminar</a>
-                        </td>
+                        <th>No_Adquisicion</th>
+                        <th>Titulo</th>
+                        <th>Fecha_adquisicion</th>
+                        <th>Ibsn</th>
+                        <th>Clasificacion</th>
+                        <th>No_Estante</th>
+                        <th>Cantidad</th>
+                        <th>Estatus</th>
+                        <th>Procedencia</th>
+                        <th>No_factura</th>
+                        <th>Acciones</th>
                     </tr>
-                }
-            </tbody>
-
-        </table>
-
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.No_Adquisicion</td>
+                            <td>@item.Titulo</td>
+                            <td>@item.Fecha_adquisicion</td>
+                            <td>@item.Ibsn</td>
+                            <td>@item.Clasificacion</td>
+                            <td>@item.No_Estante</td>
+                            <td>@item.Cantidad</td>
+                            <td>@item.Estatus</td>
+                            <td>@item.Procedencia</td>
+                            <td>@item.No_factura</td>
+                            <td>
+                                <a asp-action="Editar" asp-controller="Libros" asp-route-No_Adquisicion="@item.No_Adquisicion" class="btn btn-primary btn-sm">Editar</a>
+                                <a asp-action="Eliminar" asp-controller="Libros" asp-route-No_Adquisicion="@item.No_Adquisicion" class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-
+</div>
+<br>
+<br>
+<br>
+<br>
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

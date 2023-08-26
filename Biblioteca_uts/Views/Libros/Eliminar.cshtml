@@ -1,23 +1,76 @@
 ﻿@model LibrosModel;
 @{
     ViewData["Title"] = "Eliminar";
+    Layout = "_Layout";
 }
+
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+    }
+
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #272727;
+        border-bottom: 1px solid #333;
+        color: #ffcc00;
+    }
+
+    .btn-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    .btn-warning {
+        background-color: #ffcc00;
+        border-color: #ffcc00;
+        color: #1c1c1c;
+    }
+
+    .form-control {
+        background-color: #1c1c1c;
+        border-color: #333;
+        color: #ffffff;
+    }
+
+    .alert-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    br {
+        margin: 20px 0;
+    }
+
+</style>
+
 <div class="card col-8">
     <div class="card-header">
         Eliminar Libro
     </div>
-    <div class="card-body justyfy-content-center">
+    <div class="card-body justify-content-center">
         <form asp-action="Eliminar" asp-controller="Libros" method="post">
             <input asp-for="No_Adquisicion" type="hidden" class="form-control" />
             <div class="alert alert-danger" role="alert">
-                ¿Desea eliminar el  libro: @Html.DisplayTextFor(n=>n.Titulo)?
+                ¿Desea eliminar el libro: @Html.DisplayTextFor(n => n.Titulo)?
             </div>
             <div class="col-md-4 mb-3">
                 <button type="submit" class="btn btn-danger mb-3 btn-sm">Eliminar</button>
-                <a asp-action="Listar" asp-controller="Libros" class="btn btn-warning btn-sn">volver a la lista </a>
+                <a asp-action="Listar" asp-controller="Libros" class="btn btn-warning btn-sm">Volver a la lista</a>
             </div>
         </form>
-
     </div>
-
 </div>
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

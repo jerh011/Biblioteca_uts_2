@@ -1,63 +1,108 @@
 ﻿@model List<UsariosModels>;
 @{
     ViewData["Title"] = "Inventario";
-
+    Layout = "_Layout";
 }
 
-<div class="card col-8">
-    <div class="card-header">
-        Lista de Usuarios
-    </div>
-    <div class="card-body">
-        <a asp-action="Guardar" asp-asp-controller="Usuario" class="btn btn-primary btn-sm">Crear nuevo</a>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Identificador</th>
-                    <th>Nombres</th>
-                    <th>ApePa</th>
-                    <th>ApePa</th>
-                    <th>Correo</th>
-                    <th>Calle</th>
-                    <th>Colonia</th>
-                    <th>NroCasa</th>
-                    <th>tipo</th>
-                    <th>Usuario</th>
-                    <th>tipo</th>
-        
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteca_uts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+        }
+
+        .card {
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+        }
+
+        .card-header {
+            background-color: #272727;
+            border-bottom: 1px solid #333;
+            color: #ffcc00;
+        }
+
+        .btn-primary {
+            background-color: #ffcc00;
+            border-color: #ffcc00;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background-color: #ff3344;
+            border-color: #ff3344;
+            color: #ffffff;
+        }
+
+        th, td {
+            border-color: #333;
+            color: #fff;
+        }
+
+        br {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card col-8">
+        <div class="card-header">
+            Lista de Usuarios
+        </div>
+        <div class="card-body">
+            <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-primary btn-sm">Crear nuevo</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                         <tr>
-                      
-                            <td>@item.Identificador</td>
-                            <td>@item.Nombres</td>
-                            <td>@item.ApePa</td>
-                            <td>@item.ApeMa</td>
-                            <td>@item.Correo</td>
-                            <td>@item.Calle</td>
-                            <td>@item.Colonia</td>
-                            <td>@item.NroCasa</td>
-                            <td>@item.tipo</td>
-                            <td>@item.Usuario</td>
-                   
-                            <td>
-                           
-                                <a asp-action="Editar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Editar</a>
-                                <a asp-action="Eliminar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Eliminar</a>
-                                <a asp-action="VerPrestamo" asp-controller="Usuario" asp-route-Identificador="@item.Identificador"class="btn btn-primary btn-sm"> Prestados </a>
-                            </td>
-                       
+                            <th>Identificador</th>
+                            <th>Nombres</th>
+                            <th>ApePa</th>
+                            <th>ApeMa</th>
+                            <th>Calle</th>
+                            <th>Colonia</th>
+                            <th>NroCasa</th>
+                            <th>tipo</th>
+                            <th>Usuario</th>
+                            <th>Acciones</th>
                         </tr>
-
-                    
-                }
-            </tbody>
-
-        </table>
-
-
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Identificador</td>
+                                <td>@item.Nombres</td>
+                                <td>@item.ApePa</td>
+                                <td>@item.ApeMa</td>
+                                <td>@item.Calle</td>
+                                <td>@item.Colonia</td>
+                                <td>@item.NroCasa</td>
+                                <td>@item.tipo</td>
+                                <td>@item.Usuario</td>
+                                <td>
+                                    <a asp-action="Editar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Editar</a>
+                                    <a asp-action="Eliminar" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a asp-action="VerPrestamo" asp-controller="Usuario" asp-route-Identificador="@item.Identificador" class="btn btn-primary btn-sm">Prestados</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

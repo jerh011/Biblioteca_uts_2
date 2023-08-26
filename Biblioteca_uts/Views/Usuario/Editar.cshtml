@@ -2,8 +2,54 @@
 
 @{
     ViewData["Title"] = "Editar";
+    Layout = "_Layout";
 }
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+    }
 
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .form-control {
+        background-color: #222;
+        border: none;
+        color: #fff;
+    }
+
+    .text-danger {
+        color: #ff6161;
+    }
+
+    .btn-primary {
+        background-color: #00c7ff;
+        border-color: #00c7ff;
+    }
+
+        .btn-primary:hover {
+            background-color: #008bff;
+            border-color: #008bff;
+        }
+
+    .btn-warning {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+    }
+
+        .btn-warning:hover {
+            background-color: #ff6b00;
+            border-color: #ff6b00;
+        }
+</style>
 <h1>Editar Usuario</h1>
 
 <hr />
@@ -75,3 +121,9 @@
 </div>
 
 
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

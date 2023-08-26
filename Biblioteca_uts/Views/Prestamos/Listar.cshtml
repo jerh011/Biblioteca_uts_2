@@ -2,8 +2,58 @@
 
 @{
     ViewData["Title"] = "Listar";
+    Layout = "_Layout";
 
 }
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+    }
+
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #272727;
+        border-bottom: 1px solid #333;
+        color: #ffcc00;
+    }
+
+    .btn-primary {
+        background-color: #ffcc00;
+        border-color: #ffcc00;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    th, td {
+        border-color: #333;
+        color: #fff;
+    }
+
+    br {
+        margin: 20px 0;
+    }
+
+    .card {
+        /* Resto de estilos... */
+        width: 90%; /* Ajustar el ancho del contenedor .card */
+        margin: auto; /* Centrar el contenedor */
+    }
+
+    .table {
+        /* Resto de estilos... */
+        width: 100%; /* Hacer que la tabla ocupe todo el ancho del contenedor */
+    }
+</style>
 <div class="card col-8">
     <div class="card-header">
         Lista de Prestamos
@@ -35,12 +85,12 @@
                         <td>@item.Lib_Titulo</td>
                         <td>@item.Lib_Clasificacion</td>
                         <td>@item.Lib_IBSN</td>
-                     
+
                         <td>
                             <!--
-                            
-      
-                           
+
+
+
 
                             -->
                             <a asp-action="Editar" asp-asp-controller="Prestamos" asp-route-IdPrestamo="@item.Pre_Id_Prestamo" class="btn btn-primary btn-sm">Editar</a>
@@ -53,3 +103,9 @@
         </table>
 
     </div>
+    @if (ViewData["Mensaje"] != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewData["Mensaje"]
+        </div>
+    }

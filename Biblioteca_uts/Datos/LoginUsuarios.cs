@@ -30,7 +30,7 @@ namespace Biblioteca_uts.Datos
                         cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
                         cmd.Parameters.AddWithValue("tipo", model.tipo);
                         cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
-                        cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
+                        cmd.Parameters.AddWithValue("Usuario", model.Usuario);
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.ExecuteNonQuery();
@@ -51,6 +51,7 @@ namespace Biblioteca_uts.Datos
 
             return respuesta;
         }
+        /////////////////////////////////////////Validaciones con Usaurio//////////////////////////////////////////////////////////
         public bool existeUsuario(string Usuario)
         {
             string eIdentificador = "";
@@ -150,7 +151,7 @@ namespace Biblioteca_uts.Datos
 
 
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////Validaciones con cooreo//////////////////////////////////////////////////////////
         public bool existeCorreo(string Correo)
         {
             string eIdentificador = "";
@@ -158,7 +159,7 @@ namespace Biblioteca_uts.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario_con_correo", conexion);
+                SqlCommand cmd = new SqlCommand("sp_ValidarCorreo", conexion);
                 cmd.Parameters.AddWithValue("Correo", Correo);
                 cmd.CommandType = CommandType.StoredProcedure;
                 using (var dr = cmd.ExecuteReader())
@@ -194,7 +195,7 @@ namespace Biblioteca_uts.Datos
             using (var conexion = new SqlConnection(cn.getCadenaSql()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", conexion);
+                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario_con_correo", conexion);
                 cmd.Parameters.AddWithValue("Correo", Correo);
                 cmd.Parameters.AddWithValue("Contraseña", contraseña);
                 cmd.CommandType = CommandType.StoredProcedure;

@@ -2,7 +2,100 @@
 
 @{
     ViewData["Title"] = "Guardar";
+    Layout = "_Layout";
 }
+<style>
+    /* Estilo futurista */
+    body {
+        background-color: #f0f0f0;
+        font-family: 'Arial', sans-serif;
+    }
+
+    #catalog {
+        padding: 50px 0;
+    }
+
+    .form-container {
+        background-color: #333;
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .input-group1 {
+        position: relative;
+    }
+
+        .input-group1 input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid #777;
+            background-color: transparent;
+            color: #fff;
+            transition: border-color 0.3s;
+        }
+
+            .input-group1 input:focus {
+                outline: none;
+                border-color: #00aaff;
+            }
+
+            .input-group1 input::placeholder {
+                color: #999;
+            }
+
+        .input-group1::before {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #00aaff;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .input-group1 input:focus + ::before {
+            transform: scaleX(1);
+        }
+
+    .col-md-4 {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .sign {
+        background-color: #00aaff;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .sign:hover {
+            background-color: #0077cc;
+        }
+</style>
 <link href="~/css/regitro_libro.css" rel="stylesheet" />
 <section id="catalog">
     <div class="container">
@@ -70,3 +163,9 @@
         </center>
     </div>
 </section>
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

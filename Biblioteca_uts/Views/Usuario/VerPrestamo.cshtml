@@ -1,15 +1,52 @@
 ﻿@model List<CMT_LibroModels>;
 @{
     ViewData["Title"] = "Inventario";
-
+    Layout = "_Layout";
 }
+<style>
+    body {
+        background-color: #0f0f0f;
+        color: #ffffff;
+    }
 
+    .card {
+        background-color: #1c1c1c;
+        border: 1px solid #333;
+    }
+
+    .card-header {
+        background-color: #272727;
+        border-bottom: 1px solid #333;
+        color: #ffcc00;
+    }
+
+    .btn-primary {
+        background-color: #ffcc00;
+        border-color: #ffcc00;
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ff3344;
+        border-color: #ff3344;
+        color: #ffffff;
+    }
+
+    th, td {
+        border-color: #333;
+        color: #fff;
+    }
+
+    br {
+        margin: 20px 0;
+    }
+</style>
 <div class="card col-8">
     <div class="card-header">
         Lista de Usuarios
     </div>
     <div class="card-body">
- 
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -20,7 +57,7 @@
                     <th>IBSN</th>
                     <th>Clasificacion</th>
                     <th>Numero de estante</th>
-                    
+
             </thead>
             <tbody>
                 @foreach (var item in Model)
@@ -33,13 +70,13 @@
                         <td>@item.Lib_IBSN </td>
                         <td>@item.Lib_Clasificacion</td>
                         <td>@item.Lib_No_Estante </td>
-                      
+
 
 
 
                         <td>
                             <a asp-action="Listar" asp-controller="Usuario" class="btn btn-primary btn-sm">Regresar a la lista</a>
-                       
+
 
                         </td>
                     </tr>
@@ -50,3 +87,9 @@
 
 
     </div>
+    @if (ViewData["Mensaje"] != null)
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            @ViewData["Mensaje"]
+        </div>
+    }

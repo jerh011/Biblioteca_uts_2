@@ -131,8 +131,8 @@ where IBSN = @ibsen
 
 end
 go
---###############################################################--
-create trigger TR_CantidaLibros_elimnados
+--##posiblemente esto este mal#############################################################--
+drop trigger TR_CantidaLibros_elimnados
 on Libro
 for Delete
 as begin
@@ -232,7 +232,8 @@ SET @NUMEROTARJETADECIFRADA=CONVERT(nvarchar(100),
 DECRYPTBYKEY(@NUMEROTARJETACIFRADA));
 SELECT @NUMEROTARJETADECIFRADA AS NUMEROTARGETADECIFRADA;
 --######################################################--
-create procedure sp_ValidarUsuario_con_correo(
+create procedure sp_ValidarUsuario_con_correo
+(
 @Correo varchar (50),
 @Contraseña varchar (50)
 )
@@ -249,12 +250,4 @@ begin
 	select * from Usuario where Correo=@Correo;
 end
 go
-
-create procedure sp_CambiarClave(
-@Correo varchar(50),
-@Contraseña varchar(50))
-as
-begin
-	update Usuario set Contraseña=@Contraseña where Correo=@Correo
-end
 --####################################

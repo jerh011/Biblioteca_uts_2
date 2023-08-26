@@ -6,15 +6,14 @@ using Biblioteca_uts.Recurso;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-
+//parece que ya
 
 namespace Biblioteca_uts.Controllers
 {
-    public class LoginRController: Controller
+    public class LoginRController : Controller
     {
         LoginUsuarios LogR = new LoginUsuarios();
-        UsuarioDatos LogR1 = new UsuarioDatos();
-
+     
         public IActionResult Registro()
         {
             return View();
@@ -23,6 +22,20 @@ namespace Biblioteca_uts.Controllers
         //agregar un if por si el usuario contiene un "@" para no registrarse
         public IActionResult Registro(UsariosModels model)
         {
+             if (model.Usuario.Count(c => c == '@')> 0)
+            {
+                ViewData["Mensaje"] = "El usuario por lo menos contiene un @";
+                return View();
+
+            }
+            
+            if (model.Correo.Count(c => c == '@') == 0 || model.Correo.Count(c => c == '@')>1)
+            {
+                ViewData["Mensaje"] = "El Correo no contiene un @ o tiene mas de un @";
+                return View();
+            }
+
+
             if (!ModelState.IsValid)
             {
                 return View();
@@ -32,7 +45,7 @@ namespace Biblioteca_uts.Controllers
             if (!crearUsuario)
             {
                 //retornar una alerta warning para aclarar que el correo ya esta existente
-                ViewData["Mensaje"] = "El Coreo o El ID ya se encuentra en uso";
+                ViewData["Mensaje"] = "El Coreo, El ID o el Usuario ya se encuentra en uso";
                 return View();
             }
             else
@@ -53,31 +66,63 @@ namespace Biblioteca_uts.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string Usuario, string Contraseña)
         {
-            UsariosModels usarios = LogR.ValidarUsuario(Usuario, utilidades.EncriptarClave(Contraseña));
-            if (usarios.Identificador == 0)
-            {
-                ViewData["Mensaje"] = "El correo o clave son incorrecta";
-                return View();
-            }
-            //
-            //
-            List<Claim> claims = new List<Claim>()
-            {
+
+
+            if (Usuario.IndexOf("@")>= 0)
+            {//////////////////////////////////////////////
+
+                UsariosModels usarios = LogR.ValidarCorreo(Usuario, utilidades.EncriptarClave(Contraseña));
+                if (usarios.Identificador == 0)
+                {
+                    ViewData["Mensaje"] = "El correo o clave son incorrecta";
+                    return View();
+                }
+                //
+                //
+                List<Claim> claims = new List<Claim>()
+                {
                 new Claim(ClaimTypes.Name,usarios.Nombres)
-            };
-            ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            AuthenticationProperties properties = new AuthenticationProperties()
+                    };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                };
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), properties);
+
+                return RedirectToAction("Index", "Home");
+                //////////////////////////////////////////////
+            }
+            else
             {
-                AllowRefresh = true,
-            };
+                UsariosModels usarios = LogR.ValidarUsuario(Usuario, utilidades.EncriptarClave(Contraseña));
+                if (usarios.Identificador == 0)
+                {
+                    ViewData["Mensaje"] = "El correo o clave son incorrecta";
+                    return View();
+                }
+                //
+                //
+                List<Claim> claims = new List<Claim>()
+                {
+                new Claim(ClaimTypes.Name,usarios.Nombres)
+                    };
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                AuthenticationProperties properties = new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                };
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity), properties);
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(claimsIdentity), properties);
 
-            return RedirectToAction("Index", "Home");
-
-
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Login");
         }
         public IActionResult CambiarClave()
         {

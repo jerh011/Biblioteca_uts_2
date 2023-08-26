@@ -2,72 +2,121 @@
 
 @{
     ViewData["Title"] = "Editar";
+    Layout = "_Layout";
 }
+<style>
+    body {
+        background-color: #111;
+        color: #fff;
+    }
 
-<h1>Editar</h1>
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
 
-<h4>LibrosModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Editar" asq-controller="Libros">
+    .form-group label {
+        font-weight: bold;
+        font-size: 18px;
+    }
 
+    .form-control {
+        background-color: #222;
+        border: none;
+        color: #fff;
+    }
 
-            <input asp-for="No_Adquisicion" type="hidden"  class="form-control" />
-              
-           
-            <div class="form-group">
-                <label asp-for="Titulo" class="control-label"></label>
-                <input asp-for="Titulo" type="text" class="form-control" />
-                <span asp-validation-for="Titulo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Fecha_adquisicion" class="control-label"></label>
-                <input asp-for="Fecha_adquisicion" type="date" class="form-control" />
-                <span asp-validation-for="Fecha_adquisicion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ibsn" class="control-label"></label>
-                <input asp-for="Ibsn" type="text" class="form-control" />
-                <span asp-validation-for="Ibsn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Clasificacion" class="control-label"></label>
-                <input asp-for="Clasificacion" type="text" class="form-control" />
-                <span asp-validation-for="Clasificacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="No_Estante" class="control-label"></label>
-                <input asp-for="No_Estante" type="number" class="form-control" />
-                <span asp-validation-for="No_Estante" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" type="number" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estatus" class="control-label"></label>
-                <input asp-for="Estatus" type="text" class="form-control" />
-                <span asp-validation-for="Estatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Procedencia" class="control-label"></label>
-                <input asp-for="Procedencia" type="text" class="form-control" />
-                <span asp-validation-for="Procedencia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="No_factura" class="control-label"></label>
-                <input asp-for="No_factura" type="text" class="form-control" />
-                <span asp-validation-for="No_factura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a asp-action="Listar" asp-controller="Libros" class="btn btn-warning btn-sn">volver a la lista</a>
-            </div>
-        </form>
+    .text-danger {
+        color: #ff6161;
+    }
+
+    .btn-primary {
+        background-color: #00c7ff;
+        border-color: #00c7ff;
+    }
+
+        .btn-primary:hover {
+            background-color: #008bff;
+            border-color: #008bff;
+        }
+
+    .btn-warning {
+        background-color: #ff8c00;
+        border-color: #ff8c00;
+    }
+
+        .btn-warning:hover {
+            background-color: #ff6b00;
+            border-color: #ff6b00;
+        }
+</style>
+
+    <h1>Editar</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Editar" asq-controller="Libros">
+
+                <input asp-for="No_Adquisicion" type="hidden" class="form-control" />
+
+                
+                <div class="form-group">
+                    <label asp-for="Titulo" class="control-label"></label>
+                    <input asp-for="Titulo" type="text" class="form-control" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Fecha_adquisicion" class="control-label"></label>
+                    <input asp-for="Fecha_adquisicion" type="date" class="form-control" />
+                    <span asp-validation-for="Fecha_adquisicion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Ibsn" class="control-label"></label>
+                    <input asp-for="Ibsn" type="text" class="form-control" />
+                    <span asp-validation-for="Ibsn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Clasificacion" class="control-label"></label>
+                    <input asp-for="Clasificacion" type="text" class="form-control" />
+                    <span asp-validation-for="Clasificacion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="No_Estante" class="control-label"></label>
+                    <input asp-for="No_Estante" type="number" class="form-control" />
+                    <span asp-validation-for="No_Estante" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cantidad" class="control-label"></label>
+                    <input asp-for="Cantidad" type="number" class="form-control" />
+                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Estatus" class="control-label"></label>
+                    <input asp-for="Estatus" type="text" class="form-control" />
+                    <span asp-validation-for="Estatus" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Procedencia" class="control-label"></label>
+                    <input asp-for="Procedencia" type="text" class="form-control" />
+                    <span asp-validation-for="Procedencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="No_factura" class="control-label"></label>
+                    <input asp-for="No_factura" type="text" class="form-control" />
+                    <span asp-validation-for="No_factura" class="text-danger"></span>
+                </div>
+                <br>
+                <div class="futuristic-form-group">
+                    <input type="submit" value="Guardar" class="futuristic-button btn btn-primary" />
+                    <a asp-action="Listar" asp-controller="Libros" class="futuristic-button btn btn-warning" style="background-color:red;">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-
-
+@if (ViewData["Mensaje"] != null)
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @ViewData["Mensaje"]
+    </div>
+}

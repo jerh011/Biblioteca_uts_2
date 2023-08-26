@@ -35,7 +35,7 @@ namespace Biblioteca_uts.Datos
                             NroCasa = dr["NroCasa"].ToString(),
                             tipo = dr["tipo"].ToString(),
                             Contraseña = dr["Contraseña"].ToString(),
-                            Usuario = dr["Id_Lector"].ToString()
+                            Usuario = dr["Usuario"].ToString()
                         }
                         );
                     }
@@ -68,7 +68,7 @@ namespace Biblioteca_uts.Datos
                         Usuario.NroCasa = dr["NroCasa"].ToString();
                         Usuario.tipo = dr["tipo"].ToString();
                         Usuario.Contraseña = dr["Contraseña"].ToString();
-                        Usuario.Usuario = dr["Id_Lector"].ToString();
+                        Usuario.Usuario = dr["Usuario"].ToString();
 
                     
                     }
@@ -98,7 +98,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
                     cmd.Parameters.AddWithValue("tipo", model.tipo);
                     cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
-                    cmd.Parameters.AddWithValue("Id_Lector", model.Usuario);//Id_Lector
+                    cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();
@@ -133,7 +133,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
                     cmd.Parameters.AddWithValue("tipo", model.tipo);
                     cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
-                    cmd.Parameters.AddWithValue("Id_Lector", model.Usuario);//Id_Lector
+                    cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }
