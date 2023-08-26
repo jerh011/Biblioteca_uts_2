@@ -14,7 +14,7 @@ create procedure Sp_Modificar_Usuario
 	@Calle varchar(40)null,
 	@Colonia varchar(40)null,
 	@NroCasa varchar(10)null,
-	@tipo varchar(10)  null,
+	@Idtipo int  null,
 	@Contraseña varchar (50)  null,
 	@Usuario varchar (16) null
 	)
@@ -27,7 +27,7 @@ create procedure Sp_Modificar_Usuario
 	Calle=@Calle,
 	Colonia=@Colonia,
 	NroCasa=@NroCasa,
-	tipo=@tipo,
+	Idtipo=@Idtipo,
 	Contraseña=@Contraseña,
 	Usuario=@Usuario
 	where Identificador = @Identificador
@@ -72,7 +72,7 @@ go
 	@Calle varchar(40)null,
 	@Colonia varchar(40)null,
 	@NroCasa varchar(10)null,
-	@tipo varchar(10)  null,
+	@Idtipo int null,
 	@Contraseña varchar (50)  null,
 	@Usuario varchar (16) null
 	)
@@ -86,7 +86,7 @@ go
 	@Calle,
 	@Colonia,
 	@NroCasa,
-	@tipo,
+	@Idtipo,
 	@Contraseña,
 	@Usuario
 	)

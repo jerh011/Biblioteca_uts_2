@@ -28,7 +28,7 @@ namespace Biblioteca_uts.Datos
                         cmd.Parameters.AddWithValue("Calle", model.Calle);
                         cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                         cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
-                        cmd.Parameters.AddWithValue("tipo", model.tipo);
+                        cmd.Parameters.AddWithValue("Idtipo", model.Idtipo);
                         cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
                         cmd.Parameters.AddWithValue("Usuario", model.Usuario);
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -111,7 +111,7 @@ namespace Biblioteca_uts.Datos
                         usuario.Calle = dr["calle"].ToString();
                         usuario.Colonia = dr["Colonia"].ToString();
                         usuario.NroCasa = dr["NroCasa"].ToString();
-                        usuario.tipo = dr["Tipo"].ToString();
+                        usuario.Idtipo = Convert.ToInt32(dr["Idtipo"]);
                         usuario.Contraseña = dr["Contraseña"].ToString();
                         usuario.Usuario = dr["Usuario"].ToString();
                     }
@@ -211,7 +211,7 @@ namespace Biblioteca_uts.Datos
                         usuario.Calle = dr["calle"].ToString();
                         usuario.Colonia = dr["Colonia"].ToString();
                         usuario.NroCasa = dr["NroCasa"].ToString();
-                        usuario.tipo = dr["Tipo"].ToString();
+                        usuario.Idtipo = Convert.ToInt32(dr["Idtipo"]);
                         usuario.Contraseña = dr["Contraseña"].ToString();
                         usuario.Usuario = dr["Usuario"].ToString();
                     }

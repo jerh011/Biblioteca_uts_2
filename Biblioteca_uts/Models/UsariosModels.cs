@@ -22,7 +22,7 @@ namespace Biblioteca_uts.Models
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string NroCasa { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
-        public string tipo { get; set; }
+        public int Idtipo { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string Contraseña { get; set; }
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]

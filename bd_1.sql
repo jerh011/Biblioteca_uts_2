@@ -14,10 +14,13 @@ create table dbo.Usuario
 	Calle varchar(40)null,
 	Colonia varchar(40)null,
 	NroCasa varchar(10)null,
-	tipo varchar(10) not null,
+	Idtipo int ,
 	Contraseña varchar (50) not null,
 	Usuario varchar (16)not null,
+	Foreign key(Idtipo) references Categoria(Idtipo)
 );
+
+
 
 create table dbo.Libro
 (
@@ -46,6 +49,12 @@ create table dbo.Prestamo
 	references dbo.Libro(No_Adquisicion)
 );
 
+create table Categoria
+(
+Idtipo int primary key identity (1,1),
+Tipo varchar(50))
+
+go
 
 
 -----Procesos almacenados------
@@ -137,3 +146,7 @@ go
 	)
 	end
 	go
+
+
+	select * from Usuario
+

@@ -33,7 +33,7 @@ namespace Biblioteca_uts.Datos
                             Calle = dr["Calle"].ToString(),
                             Colonia = dr["Colonia"].ToString(),
                             NroCasa = dr["NroCasa"].ToString(),
-                            tipo = dr["tipo"].ToString(),
+                            Idtipo = Convert.ToInt32(dr["Idtipo"]),
                             Contraseña = dr["Contraseña"].ToString(),
                             Usuario = dr["Usuario"].ToString()
                         }
@@ -66,7 +66,7 @@ namespace Biblioteca_uts.Datos
                         Usuario.Calle = dr["Calle"].ToString();
                         Usuario.Colonia = dr["Colonia"].ToString();
                         Usuario.NroCasa = dr["NroCasa"].ToString();
-                        Usuario.tipo = dr["tipo"].ToString();
+                        Usuario.Idtipo = dr["Idtipo"].ToString();
                         Usuario.Contraseña = dr["Contraseña"].ToString();
                         Usuario.Usuario = dr["Usuario"].ToString();
 
@@ -96,7 +96,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("Calle", model.Calle);
                     cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
-                    cmd.Parameters.AddWithValue("tipo", model.tipo);
+                    cmd.Parameters.AddWithValue("Idtipo", model.Idtipo);
                     cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
                     cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -131,7 +131,7 @@ namespace Biblioteca_uts.Datos
                     cmd.Parameters.AddWithValue("Calle", model.Calle);
                     cmd.Parameters.AddWithValue("Colonia", model.Colonia);
                     cmd.Parameters.AddWithValue("NroCasa", model.NroCasa);
-                    cmd.Parameters.AddWithValue("tipo", model.tipo);
+                    cmd.Parameters.AddWithValue("Idtipo", model.Idtipo);
                     cmd.Parameters.AddWithValue("Contraseña", model.Contraseña);
                     cmd.Parameters.AddWithValue("Usuario", model.Usuario);//Id_Lector
                     cmd.CommandType = CommandType.StoredProcedure;
